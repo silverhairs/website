@@ -183,7 +183,8 @@ function Pre({ children, ...props }: React.HTMLAttributes<HTMLPreElement>) {
   }, [children, highlighted, isMermaid]);
 
   if (isMermaid && React.isValidElement(codeElement)) {
-    const codeContent = codeElement.props.children;
+    const props = codeElement.props as { children?: React.ReactNode };
+    const codeContent = props.children;
     return (
       <MermaidDiagram
         chart={
