@@ -14,9 +14,9 @@ async function loadTreeSitter() {
     return null;
   }
 
-  const module = await import("web-tree-sitter");
-  ParserClass = module.Parser;
-  LanguageClass = module.Language;
+  const mod = await import("web-tree-sitter");
+  ParserClass = mod.Parser;
+  LanguageClass = mod.Language;
   console.info(`we have initialized tree-sitter`);
   return { Parser: ParserClass, Language: LanguageClass };
 }
