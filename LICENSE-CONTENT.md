@@ -19,7 +19,7 @@ All content on this website (articles, reading notes, and other written material
 
 ## Code License
 
-The source code for this website (HTML, CSS, JavaScript, configuration files, etc.) is licensed under the MIT License. See the code repository for details.
+The source code for this website (HTML, CSS, JavaScript, configuration files, etc.) is licensed under the Apache License 2.0. See the [LICENSE](LICENSE) file for details.
 
 ## Full License Text
 

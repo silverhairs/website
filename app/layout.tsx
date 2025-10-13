@@ -13,7 +13,7 @@ const ibmPlexMono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Your Name - Personal Website",
+  title: "boris kayi - Personal Website",
   description: "Personal blog featuring technical articles, philosophical essays, and reading notes",
 };
 

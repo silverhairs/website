@@ -19,7 +19,7 @@
 ### 1. Update Your Information
 
 **Homepage** (`app/page.tsx`):
-- Line 11: Change "Your Name" to your actual name
+- Line 11: Update your name (currently set to "boris kayi")
 - Lines 12-14: Update your bio
 - Lines 70-78: Update social links (GitHub, Twitter, Email)
 

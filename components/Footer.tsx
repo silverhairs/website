@@ -4,7 +4,7 @@ export default function Footer() {
       <div className="max-w-4xl mx-auto px-6 py-8">
         <div className="text-sm text-muted">
           <p className="mb-2">
-            © {new Date().getFullYear()} Your Name. All content licensed under{' '}
+            © {new Date().getFullYear()} boris kayi. All content licensed under{' '}
             <a
               href="https://creativecommons.org/licenses/by-sa/4.0/"
               target="_blank"

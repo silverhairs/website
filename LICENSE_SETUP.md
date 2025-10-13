@@ -3,7 +3,7 @@
 ## Overview
 
 This website uses a dual-licensing approach:
-- **Code (MIT)**: The source code is open source
+- **Code (Apache 2.0)**: The source code is open source with patent protection
 - **Content (CC BY-SA 4.0)**: Articles and notes require attribution
 
 ## What's Been Added
@@ -19,7 +19,7 @@ A footer that appears on every page with:
 
 **What users see**:
 ```
-© 2024 Your Name. All content licensed under CC BY-SA 4.0.
+© 2024 boris kayi. All content licensed under CC BY-SA 4.0.
 You are free to share and adapt this content with attribution and under the same license.
 ```
 
@@ -29,8 +29,8 @@ Three license files have been created:
 
 #### LICENSE
 - **Covers**: Source code (HTML, CSS, JavaScript, configurations)
-- **Type**: MIT License
-- **Allows**: Free use, modification, distribution of code
+- **Type**: Apache License 2.0
+- **Allows**: Free use, modification, distribution of code with patent protection
 
 #### LICENSE-CONTENT.md
 - **Covers**: All written content (articles, reading notes)
@@ -71,14 +71,14 @@ Three license files have been created:
 
 ### Change Your Name
 
-In `components/Footer.tsx`, update line 7:
+In `components/Footer.tsx`, line 7 (currently set to "boris kayi"):
 ```tsx
-© {new Date().getFullYear()} Your Name. All content licensed under{' '}
+© {new Date().getFullYear()} boris kayi. All content licensed under{' '}
 ```
 
-In `LICENSE`, update line 3:
+In `LICENSE`, line 189 (currently set to "Boris Kayiranga"):
 ```
-Copyright (c) 2024 [Your Name]
+Copyright 2024 Boris Kayiranga
 ```
 
 ### Change License (Not Recommended)
@@ -117,9 +117,10 @@ If you don't want the license footer:
 - Encourages open knowledge sharing
 
 ### For Developers:
-- Code can be reused in other projects
+- Code can be reused in other projects with patent protection
 - Encourages open source contributions
-- Standard MIT license is widely understood
+- Apache 2.0 is widely used and trusted (used by major projects)
+- Provides explicit patent grants to users
 
 ## Legal Considerations
 
@@ -146,8 +147,8 @@ If you don't want the license footer:
 
 - [Creative Commons Official Site](https://creativecommons.org/)
 - [CC BY-SA 4.0 Legal Text](https://creativecommons.org/licenses/by-sa/4.0/legalcode)
-- [Choose a License (for code)](https://choosealicense.com/)
-- [MIT License Explained](https://opensource.org/license/mit)
+- [Apache License 2.0 Official](https://www.apache.org/licenses/LICENSE-2.0)
+- [Apache 2.0 Explained](https://choosealicense.com/licenses/apache-2.0/)
 
 ---
 

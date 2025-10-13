@@ -27,7 +27,7 @@ export async function generateMetadata({ params }: ArticlePageProps) {
   }
 
   return {
-    title: `${article.title} - Your Name`,
+    title: `${article.title} - boris kayi`,
     description: article.excerpt,
   };
 }

@@ -8,7 +8,7 @@ export default function Home() {
     <main className="max-w-4xl mx-auto px-6 py-12">
       {/* Hero Section */}
       <section className="mb-16">
-        <h1 className="text-3xl font-semibold mb-4">Your Name</h1>
+        <h1 className="text-3xl font-semibold mb-4">boris kayi</h1>
         <p className="text-muted leading-relaxed mb-6">
           Software engineer, writer, and perpetual learner. I write about code,
           mathematics, technology, philosophy, and whatever else crosses my mind.
@@ -67,13 +67,13 @@ export default function Home() {
         <div className="border-t border-border pt-8">
           <p className="text-sm text-muted mb-4">Find me elsewhere:</p>
           <div className="flex gap-4 text-sm">
-            <a href="https://github.com/yourusername" className="hover:text-accent">
+            <a href="https://github.com/silverhairs" className="hover:text-accent">
               GitHub
             </a>
-            <a href="https://twitter.com/yourusername" className="hover:text-accent">
+            <a href="https://twitter.com/silverhairs7" className="hover:text-accent">
               Twitter
             </a>
-            <a href="mailto:your.email@example.com" className="hover:text-accent">
+            <a href="mailto:hello@silverhairs.engineer" className="hover:text-accent">
               Email
             </a>
           </div>
