@@ -88,7 +88,12 @@ li a:hover {
 }
 
 /* Headings */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   color: var(--heading);
   font-weight: 600;
   line-height: 1.3;
@@ -96,9 +101,17 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom: 1rem;
 }
 
-h1 { font-size: 2rem; }
-h2 { font-size: 1.5rem; }
-h3 { font-size: 1.25rem; }
+h1 {
+  font-size: 2rem;
+}
+
+h2 {
+  font-size: 1.5rem;
+}
+
+h3 {
+  font-size: 1.25rem;
+}
 
 /* Paragraph spacing */
 p {
@@ -106,13 +119,15 @@ p {
 }
 
 /* Strong/bold text */
-strong, b {
+strong,
+b {
   color: var(--heading);
   font-weight: 600;
 }
 
 /* Emphasis/italic text */
-em, i {
+em,
+i {
   color: var(--accent);
 }
 
@@ -127,7 +142,8 @@ code {
 }
 
 pre {
-  background: #0d1117; /* github dark background */
+  background: #0d1117;
+  /* github dark background */
   padding: 1rem;
   border-radius: 0.5rem;
   overflow-x: auto;
@@ -149,7 +165,8 @@ pre code span {
 
 @media (prefers-color-scheme: light) {
   pre {
-    background: #f6f8fa; /* github light background */
+    background: #f6f8fa;
+    /* github light background */
     border: 1px solid #d0d7de;
   }
 }
@@ -157,7 +174,8 @@ pre code span {
 /* Tree-sitter applies inline styles directly, no CSS classes needed */
 
 /* Lists */
-ul, ol {
+ul,
+ol {
   margin-bottom: 1.5rem;
   padding-left: 2rem;
 }
@@ -208,7 +226,8 @@ table {
   overflow: hidden;
 }
 
-th, td {
+th,
+td {
   padding: 0.75rem;
   text-align: left;
   border-bottom: 1px solid var(--border);
