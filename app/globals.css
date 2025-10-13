@@ -84,17 +84,34 @@ code {
 }
 
 pre {
-  background: var(--border);
+  background: #1d2021; /* gruvbox dark hard background */
   padding: 1rem;
   border-radius: 0.5rem;
   overflow-x: auto;
-  margin-bottom: 1.5rem;
+  margin: 1.5rem 0;
+  border: 1px solid #3c3836;
 }
 
 pre code {
   background: transparent;
   padding: 0;
+  font-size: 0.875rem;
+  line-height: 1.7;
 }
+
+/* Remove any color inheritance that might interfere with inline styles */
+pre code span {
+  /* Inline styles from tree-sitter will apply here */
+}
+
+@media (prefers-color-scheme: light) {
+  pre {
+    background: #f9f5d7; /* gruvbox light hard background */
+    border: 1px solid #d5c4a1;
+  }
+}
+
+/* Tree-sitter applies inline styles directly, no CSS classes needed */
 
 /* Lists */
 ul, ol {

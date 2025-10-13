@@ -2,20 +2,20 @@
 
 import { MDXRemote } from 'next-mdx-remote';
 import { serialize } from 'next-mdx-remote/serialize';
-import { highlight } from 'sugar-high';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import remarkGfm from 'remark-gfm';
 import type { MDXRemoteSerializeResult } from 'next-mdx-remote';
+import { highlightCode } from './shiki-highlighter';
 
-// Custom code block component with syntax highlighting
+// Custom code block component
 function Code({ children, className, ...props }: React.HTMLAttributes<HTMLElement>) {
   // Check if this is a mermaid diagram
   if (className === 'language-mermaid') {
     return <MermaidDiagram chart={children as string} />;
   }
 
-  const codeHTML = highlight(children as string);
-  return <code dangerouslySetInnerHTML={{ __html: codeHTML }} {...props} />;
+  // For inline code, just render it normally
+  return <code className={className} {...props}>{children}</code>;
 }
 
 // Mermaid diagram component - renders client-side
@@ -46,10 +46,67 @@ function MermaidDiagram({ chart }: { chart: string }) {
   return <div dangerouslySetInnerHTML={{ __html: svg }} className="my-4" />;
 }
 
-// Custom pre component
+// Custom pre component with tree-sitter syntax highlighting
 function Pre({ children, ...props }: React.HTMLAttributes<HTMLPreElement>) {
+  const preRef = useRef<HTMLPreElement>(null);
+  const [highlighted, setHighlighted] = useState(false);
+
+  // Check if this is a mermaid code block
+  const childArray = React.Children.toArray(children);
+  const codeElement = childArray.find((child) =>
+    React.isValidElement(child) && child.type === 'code'
+  );
+
+  if (React.isValidElement(codeElement)) {
+    const className = codeElement.props.className || '';
+    if (className.includes('language-mermaid')) {
+      const codeContent = codeElement.props.children;
+      return <MermaidDiagram chart={typeof codeContent === 'string' ? codeContent : String(codeContent)} />;
+    }
+  }
+
+  useEffect(() => {
+    if (preRef.current && !highlighted) {
+      const codeElement = preRef.current.querySelector('code');
+      if (codeElement) {
+        const className = codeElement.className || '';
+        const match = className.match(/language-(\w+)/);
+
+        if (match) {
+          const language = match[1];
+
+          // Skip mermaid diagrams
+          if (language === 'mermaid') {
+            return;
+          }
+
+          const code = codeElement.textContent || '';
+
+          // Detect theme (dark mode)
+          const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+          // Highlight with Shiki
+          console.log(`Attempting to highlight ${language} code`);
+          highlightCode(code, language, isDark).then((html) => {
+            // Shiki returns complete HTML with pre and code tags, extract just the inner content
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = html;
+            const shikiPre = tempDiv.querySelector('pre');
+            if (shikiPre && preRef.current) {
+              // Replace the entire pre element with Shiki's pre element
+              preRef.current.replaceWith(shikiPre);
+            }
+            setHighlighted(true);
+          }).catch(error => {
+            console.error('Error during highlighting:', error);
+          });
+        }
+      }
+    }
+  }, [children, highlighted]);
+
   return (
-    <pre {...props}>
+    <pre ref={preRef} {...props}>
       {children}
     </pre>
   );
