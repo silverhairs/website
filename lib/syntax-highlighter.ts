@@ -116,7 +116,7 @@ function getColorForNodeType(nodeType: string, isDark: boolean): string {
   return colors.fg;
 }
 
-let parserCache: { [key: string]: any } = {};
+const parserCache: { [key: string]: any } = {};
 let initialized = false;
 
 export async function initTreeSitter() {
@@ -128,10 +128,10 @@ export async function initTreeSitter() {
   }
 
   try {
-    const module = await loadTreeSitter();
-    if (!module) return;
+    const mod = await loadTreeSitter();
+    if (!mod) return;
 
-    await module.Parser.init({
+    await mod.Parser.init({
       locateFile(scriptName: string) {
         return `/tree-sitter/${scriptName}`;
       },
@@ -158,15 +158,15 @@ async function getParser(language: string): Promise<any | null> {
       return null;
     }
 
-    const module = await loadTreeSitter();
-    if (!module) return null;
+    const mod = await loadTreeSitter();
+    if (!mod) return null;
 
-    const parser = new module.Parser();
+    const parser = new mod.Parser();
     const wasmPath = `/tree-sitter/tree-sitter-${language}.wasm`;
 
     try {
       console.log(`Loading language WASM from: ${wasmPath}`);
-      const Lang = await module.Language.load(wasmPath);
+      const Lang = await mod.Language.load(wasmPath);
       console.log(`Language loaded successfully:`, Lang);
       parser.setLanguage(Lang);
       console.log(`Parser language set successfully`);

@@ -131,21 +131,11 @@ function Pre({ children, ...props }: React.HTMLAttributes<HTMLPreElement>) {
     (child) => React.isValidElement(child) && child.type === "code",
   );
 
-  if (React.isValidElement(codeElement)) {
-    const className = codeElement.props.className || "";
-    if (className.includes("language-mermaid")) {
-      const codeContent = codeElement.props.children;
-      return (
-        <MermaidDiagram
-          chart={
-            typeof codeContent === "string" ? codeContent : String(codeContent)
-          }
-        />
-      );
-    }
-  }
+  const isMermaid = React.isValidElement(codeElement) &&
+    (codeElement.props.className || "").includes("language-mermaid");
 
   useEffect(() => {
+    if (isMermaid) return;
     if (preRef.current && !highlighted) {
       const codeElement = preRef.current.querySelector("code");
       if (codeElement) {
@@ -186,7 +176,18 @@ function Pre({ children, ...props }: React.HTMLAttributes<HTMLPreElement>) {
         }
       }
     }
-  }, [children, highlighted]);
+  }, [children, highlighted, isMermaid]);
+
+  if (isMermaid && React.isValidElement(codeElement)) {
+    const codeContent = codeElement.props.children;
+    return (
+      <MermaidDiagram
+        chart={
+          typeof codeContent === "string" ? codeContent : String(codeContent)
+        }
+      />
+    );
+  }
 
   return (
     <div ref={containerRef} className="relative group">
