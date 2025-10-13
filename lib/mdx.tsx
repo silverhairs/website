@@ -46,10 +46,43 @@ function MermaidDiagram({ chart }: { chart: string }) {
   return <div dangerouslySetInnerHTML={{ __html: svg }} className="my-4" />;
 }
 
+// Copy button component
+function CopyButton({ code }: { code: string }) {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = async () => {
+    await navigator.clipboard.writeText(code);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  return (
+    <button
+      onClick={handleCopy}
+      className="absolute top-2 right-2 p-2 rounded bg-code-bg hover:bg-border transition-colors text-foreground opacity-70 hover:opacity-100"
+      title="Copy code"
+      aria-label="Copy code to clipboard"
+    >
+      {copied ? (
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2">
+          <path d="M13.5 3.5L6 11L2.5 7.5" strokeLinecap="round" strokeLinejoin="round"/>
+        </svg>
+      ) : (
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2">
+          <rect x="5" y="5" width="9" height="9" rx="1" strokeLinecap="round" strokeLinejoin="round"/>
+          <path d="M3 11V3a1 1 0 0 1 1-1h8" strokeLinecap="round" strokeLinejoin="round"/>
+        </svg>
+      )}
+    </button>
+  );
+}
+
 // Custom pre component with tree-sitter syntax highlighting
 function Pre({ children, ...props }: React.HTMLAttributes<HTMLPreElement>) {
   const preRef = useRef<HTMLPreElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const [highlighted, setHighlighted] = useState(false);
+  const [code, setCode] = useState('');
 
   // Check if this is a mermaid code block
   const childArray = React.Children.toArray(children);
@@ -80,21 +113,25 @@ function Pre({ children, ...props }: React.HTMLAttributes<HTMLPreElement>) {
             return;
           }
 
-          const code = codeElement.textContent || '';
+          const codeText = codeElement.textContent || '';
+          setCode(codeText);
 
           // Detect theme (dark mode)
           const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
           // Highlight with Shiki
           console.log(`Attempting to highlight ${language} code`);
-          highlightCode(code, language, isDark).then((html) => {
+          highlightCode(codeText, language, isDark).then((html) => {
             // Shiki returns complete HTML with pre and code tags, extract just the inner content
             const tempDiv = document.createElement('div');
             tempDiv.innerHTML = html;
             const shikiPre = tempDiv.querySelector('pre');
-            if (shikiPre && preRef.current) {
-              // Replace the entire pre element with Shiki's pre element
-              preRef.current.replaceWith(shikiPre);
+            if (shikiPre && containerRef.current) {
+              // Replace the pre element but keep the container
+              const oldPre = containerRef.current.querySelector('pre');
+              if (oldPre) {
+                oldPre.replaceWith(shikiPre);
+              }
             }
             setHighlighted(true);
           }).catch(error => {
@@ -106,9 +143,12 @@ function Pre({ children, ...props }: React.HTMLAttributes<HTMLPreElement>) {
   }, [children, highlighted]);
 
   return (
-    <pre ref={preRef} {...props}>
-      {children}
-    </pre>
+    <div ref={containerRef} className="relative group">
+      <pre ref={preRef} {...props}>
+        {children}
+      </pre>
+      {code && <CopyButton code={code} />}
+    </div>
   );
 }
 
