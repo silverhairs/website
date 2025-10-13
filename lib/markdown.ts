@@ -1,15 +1,15 @@
-import fs from 'fs';
-import path from 'path';
-import matter from 'gray-matter';
-import readingTime from 'reading-time';
+import fs from "fs";
+import path from "path";
+import matter from "gray-matter";
+import readingTime from "reading-time";
 
-const contentDirectory = path.join(process.cwd(), 'content');
+const contentDirectory = path.join(process.cwd(), "content");
 
 export interface ArticleMeta {
   slug: string;
   title: string;
   date: string;
-  category: 'technical' | 'rants' | 'philosophy';
+  category: "technical" | "rants" | "philosophy";
   tags: string[];
   excerpt: string;
   readingTime: string;
@@ -23,8 +23,8 @@ export interface ReadingItem {
   slug: string;
   title: string;
   author: string;
-  type: 'book' | 'paper';
-  status: 'reading' | 'read' | 'to-read';
+  type: "book" | "paper";
+  status: "reading" | "read" | "to-read";
   dateAdded: string;
   dateFinished?: string;
   notes?: string;
@@ -32,9 +32,8 @@ export interface ReadingItem {
   url?: string;
 }
 
-// Get all articles
 export function getAllArticles(): ArticleMeta[] {
-  const articlesDirectory = path.join(contentDirectory, 'articles');
+  const articlesDirectory = path.join(contentDirectory, "articles");
 
   if (!fs.existsSync(articlesDirectory)) {
     return [];
@@ -42,11 +41,11 @@ export function getAllArticles(): ArticleMeta[] {
 
   const fileNames = fs.readdirSync(articlesDirectory);
   const articles = fileNames
-    .filter((fileName) => fileName.endsWith('.md') || fileName.endsWith('.mdx'))
+    .filter((fileName) => fileName.endsWith(".md") || fileName.endsWith(".mdx"))
     .map((fileName) => {
-      const slug = fileName.replace(/\.mdx?$/, '');
+      const slug = fileName.replace(/\.mdx?$/, "");
       const fullPath = path.join(articlesDirectory, fileName);
-      const fileContents = fs.readFileSync(fullPath, 'utf8');
+      const fileContents = fs.readFileSync(fullPath, "utf8");
       const { data, content } = matter(fileContents);
       const stats = readingTime(content);
 
@@ -54,31 +53,31 @@ export function getAllArticles(): ArticleMeta[] {
         slug,
         title: data.title || slug,
         date: data.date || new Date().toISOString(),
-        category: data.category || 'technical',
+        category: data.category || "technical",
         tags: data.tags || [],
-        excerpt: data.excerpt || content.slice(0, 150) + '...',
+        excerpt: data.excerpt || content.slice(0, 150) + "...",
         readingTime: stats.text,
       };
     });
 
-  // Sort by date, newest first
-  return articles.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  return articles.sort(
+    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
+  );
 }
 
-// Get single article by slug
 export function getArticleBySlug(slug: string): Article | null {
-  const articlesDirectory = path.join(contentDirectory, 'articles');
+  const articlesDirectory = path.join(contentDirectory, "articles");
 
   try {
     const fullPath = path.join(articlesDirectory, `${slug}.md`);
     let fileContents: string;
 
     if (fs.existsSync(fullPath)) {
-      fileContents = fs.readFileSync(fullPath, 'utf8');
+      fileContents = fs.readFileSync(fullPath, "utf8");
     } else {
       const mdxPath = path.join(articlesDirectory, `${slug}.mdx`);
       if (fs.existsSync(mdxPath)) {
-        fileContents = fs.readFileSync(mdxPath, 'utf8');
+        fileContents = fs.readFileSync(mdxPath, "utf8");
       } else {
         return null;
       }
@@ -91,9 +90,9 @@ export function getArticleBySlug(slug: string): Article | null {
       slug,
       title: data.title || slug,
       date: data.date || new Date().toISOString(),
-      category: data.category || 'technical',
+      category: data.category || "technical",
       tags: data.tags || [],
-      excerpt: data.excerpt || content.slice(0, 150) + '...',
+      excerpt: data.excerpt || content.slice(0, 150) + "...",
       readingTime: stats.text,
       content,
     };
@@ -103,15 +102,13 @@ export function getArticleBySlug(slug: string): Article | null {
   }
 }
 
-// Get articles by category
 export function getArticlesByCategory(category: string): ArticleMeta[] {
   const allArticles = getAllArticles();
   return allArticles.filter((article) => article.category === category);
 }
 
-// Get all reading items
 export function getAllReadingItems(): ReadingItem[] {
-  const readingDirectory = path.join(contentDirectory, 'reading');
+  const readingDirectory = path.join(contentDirectory, "reading");
 
   if (!fs.existsSync(readingDirectory)) {
     return [];
@@ -119,19 +116,19 @@ export function getAllReadingItems(): ReadingItem[] {
 
   const fileNames = fs.readdirSync(readingDirectory);
   const items = fileNames
-    .filter((fileName) => fileName.endsWith('.md'))
+    .filter((fileName) => fileName.endsWith(".md"))
     .map((fileName) => {
-      const slug = fileName.replace(/\.md$/, '');
+      const slug = fileName.replace(/\.md$/, "");
       const fullPath = path.join(readingDirectory, fileName);
-      const fileContents = fs.readFileSync(fullPath, 'utf8');
+      const fileContents = fs.readFileSync(fullPath, "utf8");
       const { data, content } = matter(fileContents);
 
       return {
         slug,
         title: data.title || slug,
-        author: data.author || 'Unknown',
-        type: data.type || 'book',
-        status: data.status || 'to-read',
+        author: data.author || "Unknown",
+        type: data.type || "book",
+        status: data.status || "to-read",
         dateAdded: data.dateAdded || new Date().toISOString(),
         dateFinished: data.dateFinished,
         notes: content,
@@ -140,13 +137,13 @@ export function getAllReadingItems(): ReadingItem[] {
       };
     });
 
-  // Sort by date added, newest first
-  return items.sort((a, b) => new Date(b.dateAdded).getTime() - new Date(a.dateAdded).getTime());
+  return items.sort(
+    (a, b) => new Date(b.dateAdded).getTime() - new Date(a.dateAdded).getTime(),
+  );
 }
 
-// Get single reading item by slug
 export function getReadingItemBySlug(slug: string): ReadingItem | null {
-  const readingDirectory = path.join(contentDirectory, 'reading');
+  const readingDirectory = path.join(contentDirectory, "reading");
 
   try {
     const fullPath = path.join(readingDirectory, `${slug}.md`);
@@ -155,15 +152,15 @@ export function getReadingItemBySlug(slug: string): ReadingItem | null {
       return null;
     }
 
-    const fileContents = fs.readFileSync(fullPath, 'utf8');
+    const fileContents = fs.readFileSync(fullPath, "utf8");
     const { data, content } = matter(fileContents);
 
     return {
       slug,
       title: data.title || slug,
-      author: data.author || 'Unknown',
-      type: data.type || 'book',
-      status: data.status || 'to-read',
+      author: data.author || "Unknown",
+      type: data.type || "book",
+      status: data.status || "to-read",
       dateAdded: data.dateAdded || new Date().toISOString(),
       dateFinished: data.dateFinished,
       notes: content,
@@ -176,7 +173,6 @@ export function getReadingItemBySlug(slug: string): ReadingItem | null {
   }
 }
 
-// Get reading items by status
 export function getReadingItemsByStatus(status: string): ReadingItem[] {
   const allItems = getAllReadingItems();
   return allItems.filter((item) => item.status === status);
