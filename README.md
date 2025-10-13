@@ -216,7 +216,15 @@ The codebase is designed to be extensible. Some ideas:
 
 ## License
 
-This project is open source and available under the MIT License.
+### Code License
+The source code of this website is open source and available under the **MIT License**. See [LICENSE](LICENSE) for details.
+
+### Content License
+All content (articles, reading notes, and other written material) is licensed under **[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)**. See [LICENSE-CONTENT.md](LICENSE-CONTENT.md) for full details.
+
+This means:
+- **Code**: Free to use, modify, and distribute (MIT)
+- **Content**: Free to share and adapt with attribution and same license (CC BY-SA 4.0)
 
 ## Credits
 
