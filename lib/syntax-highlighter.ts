@@ -1,6 +1,8 @@
 // Dynamic import for web-tree-sitter to avoid server-side bundling
-let ParserClass: typeof import("web-tree-sitter").Parser | null = null;
-let LanguageClass: typeof import("web-tree-sitter").Language | null = null;
+import type { Parser, Language, SyntaxNode } from "web-tree-sitter";
+
+let ParserClass: typeof Parser | null = null;
+let LanguageClass: typeof Language | null = null;
 
 async function loadTreeSitter() {
   console.info("currently loading tree-sitter");
@@ -14,9 +16,9 @@ async function loadTreeSitter() {
     return null;
   }
 
-  const mod = await import("web-tree-sitter");
-  ParserClass = mod.Parser;
-  LanguageClass = mod.Language;
+  const treeSitter = await import("web-tree-sitter");
+  ParserClass = treeSitter.Parser;
+  LanguageClass = treeSitter.Language;
   console.info(`we have initialized tree-sitter`);
   return { Parser: ParserClass, Language: LanguageClass };
 }
@@ -116,7 +118,7 @@ function getColorForNodeType(nodeType: string, isDark: boolean): string {
   return colors.fg;
 }
 
-const parserCache: { [key: string]: any } = {};
+const parserCache: { [key: string]: Parser } = {};
 let initialized = false;
 
 export async function initTreeSitter() {
@@ -142,7 +144,7 @@ export async function initTreeSitter() {
   }
 }
 
-async function getParser(language: string): Promise<any | null> {
+async function getParser(language: string): Promise<Parser | null> {
   if (typeof window === "undefined") {
     return null;
   }
@@ -227,7 +229,7 @@ export async function highlightCode(
     let html = "";
     let lastIndex = 0;
 
-    function traverse(node: any) {
+    function traverse(node: SyntaxNode) {
       if (node.childCount === 0) {
         // Leaf node - apply coloring
         // First, add any text between last processed node and this one
