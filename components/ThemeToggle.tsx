@@ -31,14 +31,15 @@ export default function ThemeToggle() {
 
   // Prevent hydration mismatch
   if (!mounted) {
-    return <div className="w-8 h-8" />;
+    return <div className="w-10 h-10" />;
   }
 
   return (
     <button
       onClick={toggleTheme}
-      className="text-sm hover:text-accent transition-colors"
+      className="text-2xl hover:text-accent transition-colors p-2 -m-2"
       aria-label="Toggle theme"
+      title={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
     >
       {theme === 'light' ? '☀' : '☾'}
     </button>
