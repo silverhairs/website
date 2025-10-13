@@ -132,7 +132,11 @@ function Pre({ children, ...props }: React.HTMLAttributes<HTMLPreElement>) {
   );
 
   const isMermaid = React.isValidElement(codeElement) &&
-    (codeElement.props.className || "").includes("language-mermaid");
+    typeof codeElement.props === "object" &&
+    codeElement.props !== null &&
+    "className" in codeElement.props &&
+    typeof codeElement.props.className === "string" &&
+    codeElement.props.className.includes("language-mermaid");
 
   useEffect(() => {
     if (isMermaid) return;
