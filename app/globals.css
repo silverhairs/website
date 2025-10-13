@@ -1,11 +1,24 @@
 @import "tailwindcss";
 
+/* GitHub Light theme colors */
 :root {
   --background: #ffffff;
-  --foreground: #1a1a1a;
-  --accent: #0066cc;
-  --muted: #666666;
-  --border: #e5e5e5;
+  --foreground: #24292f;
+  --accent: #0969da;
+  --muted: #57606a;
+  --border: #d0d7de;
+  --heading: #24292f;
+  --link: #0969da;
+  --link-hover: #0550ae;
+  --code-bg: #f6f8fa;
+  --quote-text: #57606a;
+  --red: #cf222e;
+  --green: #1a7f37;
+  --yellow: #9a6700;
+  --blue: #0969da;
+  --purple: #8250df;
+  --aqua: #1b7c83;
+  --orange: #bc4c00;
 }
 
 @theme inline {
@@ -17,13 +30,26 @@
   --font-mono: var(--font-ibm-plex-mono);
 }
 
+/* GitHub Dark theme colors */
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #e5e5e5;
-    --accent: #4d94ff;
-    --muted: #999999;
-    --border: #2a2a2a;
+    --background: #0d1117;
+    --foreground: #e6edf3;
+    --accent: #58a6ff;
+    --muted: #8b949e;
+    --border: #30363d;
+    --heading: #e6edf3;
+    --link: #58a6ff;
+    --link-hover: #79c0ff;
+    --code-bg: #161b22;
+    --quote-text: #8b949e;
+    --red: #f85149;
+    --green: #3fb950;
+    --yellow: #d29922;
+    --blue: #58a6ff;
+    --purple: #bc8cff;
+    --aqua: #39c5cf;
+    --orange: #ff9063;
   }
 }
 
@@ -47,18 +73,23 @@ article {
 
 /* Link styles */
 a {
-  color: var(--accent);
+  color: var(--link);
   text-decoration: none;
   border-bottom: 1px solid transparent;
   transition: border-color 0.2s ease;
 }
 
-a:hover {
-  border-bottom-color: var(--accent);
+/* Only apply hover styles to links within article content, not navigation links */
+article a:hover,
+p a:hover,
+li a:hover {
+  color: var(--link-hover);
+  border-bottom-color: var(--link-hover);
 }
 
 /* Headings */
 h1, h2, h3, h4, h5, h6 {
+  color: var(--heading);
   font-weight: 600;
   line-height: 1.3;
   margin-top: 2rem;
@@ -74,28 +105,40 @@ p {
   margin-bottom: 1.5rem;
 }
 
+/* Strong/bold text */
+strong, b {
+  color: var(--heading);
+  font-weight: 600;
+}
+
+/* Emphasis/italic text */
+em, i {
+  color: var(--accent);
+}
+
 /* Code blocks */
 code {
   font-family: var(--font-ibm-plex-mono), monospace;
-  background: var(--border);
+  background: var(--code-bg);
+  color: var(--foreground);
   padding: 0.125rem 0.25rem;
   border-radius: 0.25rem;
   font-size: 0.9em;
 }
 
 pre {
-  background: #1d2021; /* gruvbox dark hard background */
+  background: #0d1117; /* github dark background */
   padding: 1rem;
   border-radius: 0.5rem;
   overflow-x: auto;
   margin: 1.5rem 0;
-  border: 1px solid #3c3836;
+  border: 1px solid #30363d;
 }
 
 pre code {
   background: transparent;
   padding: 0;
-  font-size: 0.875rem;
+  font-size: 1rem;
   line-height: 1.7;
 }
 
@@ -106,8 +149,8 @@ pre code span {
 
 @media (prefers-color-scheme: light) {
   pre {
-    background: #f9f5d7; /* gruvbox light hard background */
-    border: 1px solid #d5c4a1;
+    background: #f6f8fa; /* github light background */
+    border: 1px solid #d0d7de;
   }
 }
 
@@ -123,19 +166,35 @@ li {
   margin-bottom: 0.5rem;
 }
 
+/* List markers */
+ul li::marker {
+  color: var(--accent);
+}
+
+ol li::marker {
+  color: var(--accent);
+  font-weight: 600;
+}
+
 /* Blockquotes */
 blockquote {
-  border-left: 3px solid var(--accent);
-  padding-left: 1rem;
+  border-left: 4px solid var(--accent);
+  padding: 0.5rem 1rem;
   margin: 1.5rem 0;
-  color: var(--muted);
+  background: var(--code-bg);
+  color: var(--quote-text);
   font-style: italic;
+  border-radius: 0 0.25rem 0.25rem 0;
+}
+
+blockquote p:last-child {
+  margin-bottom: 0;
 }
 
 /* Horizontal rules */
 hr {
   border: none;
-  border-top: 1px solid var(--border);
+  border-top: 2px solid var(--border);
   margin: 2rem 0;
 }
 
@@ -144,6 +203,9 @@ table {
   width: 100%;
   border-collapse: collapse;
   margin-bottom: 1.5rem;
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  overflow: hidden;
 }
 
 th, td {
@@ -154,4 +216,14 @@ th, td {
 
 th {
   font-weight: 600;
+  background: var(--code-bg);
+  color: var(--heading);
+}
+
+tr:last-child td {
+  border-bottom: none;
+}
+
+tr:hover {
+  background: var(--code-bg);
 }

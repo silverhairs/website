@@ -8,7 +8,7 @@ export async function highlightCode(
   try {
     const html = await codeToHtml(code, {
       lang: language,
-      theme: isDark ? "gruvbox-dark-hard" : "gruvbox-light-hard",
+      theme: isDark ? "github-dark" : "github-light",
     });
 
     return html;
