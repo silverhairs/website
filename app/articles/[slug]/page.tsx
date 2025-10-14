@@ -44,7 +44,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
     <main className="max-w-4xl mx-auto px-6 py-12">
       <Link
         href="/articles"
-        className="inline-block mb-8 text-sm text-muted hover:text-accent"
+        className="inline-block mb-8 text-base text-muted hover:text-accent"
       >
         ← back to articles
       </Link>
@@ -88,7 +88,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
       <footer className="mt-16 pt-8 border-t border-border">
         <Link
           href="/articles"
-          className="text-sm text-muted hover:text-accent"
+          className="text-base text-muted hover:text-accent"
         >
           ← back to articles
         </Link>

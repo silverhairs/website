@@ -37,7 +37,7 @@ export default function ArticlesClient({ articles }: ArticlesClientProps) {
             <button
               key={cat.value}
               onClick={() => setFilter(cat.value)}
-              className={`px-3 py-1.5 text-sm rounded transition-colors ${
+              className={`px-3 py-1.5 text-base rounded transition-colors ${
                 filter === cat.value
                   ? 'bg-foreground text-background'
                   : 'bg-border hover:bg-foreground/10'

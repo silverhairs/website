@@ -5,9 +5,9 @@
   --background: #ffffff;
   --foreground: #24292f;
   --accent: #0969da;
-  --muted: #57606a;
+  --muted: #24292f;
   --border: #d0d7de;
-  --heading: #24292f;
+  --heading: #57606a;
   --link: #0969da;
   --link-hover: #0550ae;
   --code-bg: #f6f8fa;
@@ -27,7 +27,8 @@
   --color-accent: var(--accent);
   --color-muted: var(--muted);
   --color-border: var(--border);
-  --font-mono: var(--font-ibm-plex-mono);
+  --font-sans: var(--font-geist);
+  --font-mono: var(--font-geist-mono);
 }
 
 /* GitHub Dark theme colors */
@@ -36,9 +37,9 @@
     --background: #0d1117;
     --foreground: #e6edf3;
     --accent: #58a6ff;
-    --muted: #8b949e;
+    --muted: #e6edf3;
     --border: #30363d;
-    --heading: #e6edf3;
+    --heading: #8b949e;
     --link: #58a6ff;
     --link-hover: #79c0ff;
     --code-bg: #161b22;
@@ -56,7 +57,8 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-ibm-plex-mono), monospace;
+  font-family: var(--font-geist), sans-serif;
+  font-size: 18px;
   line-height: 1.7;
 }
 
@@ -133,7 +135,7 @@ i {
 
 /* Code blocks */
 code {
-  font-family: var(--font-ibm-plex-mono), monospace;
+  font-family: var(--font-geist-mono), monospace;
   background: var(--code-bg);
   color: var(--foreground);
   padding: 0.125rem 0.25rem;

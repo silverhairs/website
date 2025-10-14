@@ -50,7 +50,7 @@ export default function ReadingClient({ items }: ReadingClientProps) {
             <button
               key={statusFilter.value}
               onClick={() => setFilter(statusFilter.value)}
-              className={`px-3 py-1.5 text-sm rounded transition-colors ${
+              className={`px-3 py-1.5 text-base rounded transition-colors ${
                 filter === statusFilter.value
                   ? 'bg-foreground text-background'
                   : 'bg-border hover:bg-foreground/10'

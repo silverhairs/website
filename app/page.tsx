@@ -10,8 +10,8 @@ export default function Home() {
       <section className="mb-16">
         <h1 className="text-3xl font-semibold mb-4">boris kayi</h1>
         <p className="text-muted leading-relaxed mb-6">
-          engineer, and perpetual learner. I write about computer science,
-          technology, philosophy, and whatever else crosses my mind.
+          software engineering generalist and perpetual learner. I write about
+          computers, technology, and whatever else crosses my mind.
         </p>
         <p className="text-muted leading-relaxed">
           This is a space for thinking, reading, ranting, and sharing ideas.
@@ -26,7 +26,7 @@ export default function Home() {
           <h2 className="text-xl font-semibold">Recent Articles</h2>
           <Link
             href="/articles"
-            className="text-sm text-muted hover:text-accent"
+            className="text-base text-muted hover:text-accent"
           >
             view all →
           </Link>
@@ -70,8 +70,8 @@ export default function Home() {
       {/* Quick Links */}
       <section>
         <div className="border-t border-border pt-8">
-          <p className="text-sm text-muted mb-4">Find me elsewhere:</p>
-          <div className="flex gap-4 text-sm">
+          <p className="text-base text-muted mb-4">Find me elsewhere:</p>
+          <div className="flex gap-4 text-base">
             <a
               href="https://github.com/silverhairs"
               className="hover:text-accent"

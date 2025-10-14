@@ -57,7 +57,7 @@ export default async function ReadingItemPage({ params }: ReadingItemPageProps) 
     <main className="max-w-4xl mx-auto px-6 py-12">
       <Link
         href="/reading"
-        className="inline-block mb-8 text-sm text-muted hover:text-accent"
+        className="inline-block mb-8 text-base text-muted hover:text-accent"
       >
         ← back to reading list
       </Link>
@@ -111,7 +111,7 @@ export default async function ReadingItemPage({ params }: ReadingItemPageProps) 
                 href={item.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-sm text-accent hover:underline"
+                className="text-base text-accent hover:underline"
               >
                 View external link →
               </a>
@@ -132,7 +132,7 @@ export default async function ReadingItemPage({ params }: ReadingItemPageProps) 
       <footer className="mt-16 pt-8 border-t border-border">
         <Link
           href="/reading"
-          className="text-sm text-muted hover:text-accent"
+          className="text-base text-muted hover:text-accent"
         >
           ← back to reading list
         </Link>
