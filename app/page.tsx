@@ -9,7 +9,7 @@ export default function Home() {
       {/* Hero Section */}
       <section className="py-24">
         <p
-          className="text-xl md:text-2xl leading-relaxed mb-8 text-justify"
+          className="text-xl md:text-2xl leading-relaxed mb-8"
           style={{ color: "var(--foreground)" }}
         >
           Also known online by the moniker silverhairs{" "}
@@ -17,7 +17,8 @@ export default function Home() {
             /ˈsɪl.vər.hɛər/
           </span>
           , Boris is a perpetual learner with various interests including but
-          limited to energy, software, architecture, and finance. <br />
+          limited to software, energy, aerospace, architecture, and finance.{" "}
+          <br />
           Here, he writes about computers, technology, and whatever else crosses
           my mind.
         </p>
