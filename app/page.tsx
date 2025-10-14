@@ -1,5 +1,5 @@
-import Link from 'next/link';
-import { getAllArticles } from '@/lib/markdown';
+import Link from "next/link";
+import { getAllArticles } from "@/lib/markdown";
 
 export default function Home() {
   const recentArticles = getAllArticles().slice(0, 5);
@@ -10,13 +10,13 @@ export default function Home() {
       <section className="mb-16">
         <h1 className="text-3xl font-semibold mb-4">boris kayi</h1>
         <p className="text-muted leading-relaxed mb-6">
-          Software engineer, writer, and perpetual learner. I write about code,
-          mathematics, technology, philosophy, and whatever else crosses my mind.
+          engineer, and perpetual learner. I write about computer science,
+          technology, philosophy, and whatever else crosses my mind.
         </p>
         <p className="text-muted leading-relaxed">
-          This is a space for thinking, reading, and sharing ideas. Feel free to
-          explore my <Link href="/articles">articles</Link> or see what I&apos;m{' '}
-          <Link href="/reading">reading</Link>.
+          This is a space for thinking, reading, ranting, and sharing ideas.
+          Feel free to explore my <Link href="/articles">articles</Link> or see
+          what I&apos;m <Link href="/reading">reading</Link>.
         </p>
       </section>
 
@@ -24,13 +24,18 @@ export default function Home() {
       <section className="mb-16">
         <div className="flex items-center justify-between mb-6">
           <h2 className="text-xl font-semibold">Recent Articles</h2>
-          <Link href="/articles" className="text-sm text-muted hover:text-accent">
+          <Link
+            href="/articles"
+            className="text-sm text-muted hover:text-accent"
+          >
             view all →
           </Link>
         </div>
 
         {recentArticles.length === 0 ? (
-          <p className="text-muted text-sm">No articles yet. Check back soon!</p>
+          <p className="text-muted text-sm">
+            No articles yet. Check back soon!
+          </p>
         ) : (
           <div className="space-y-8">
             {recentArticles.map((article) => (
@@ -41,10 +46,10 @@ export default function Home() {
                       {article.title}
                     </h3>
                     <time className="text-sm text-muted whitespace-nowrap">
-                      {new Date(article.date).toLocaleDateString('en-US', {
-                        year: 'numeric',
-                        month: 'short',
-                        day: 'numeric',
+                      {new Date(article.date).toLocaleDateString("en-US", {
+                        year: "numeric",
+                        month: "short",
+                        day: "numeric",
                       })}
                     </time>
                   </div>
@@ -67,13 +72,22 @@ export default function Home() {
         <div className="border-t border-border pt-8">
           <p className="text-sm text-muted mb-4">Find me elsewhere:</p>
           <div className="flex gap-4 text-sm">
-            <a href="https://github.com/silverhairs" className="hover:text-accent">
+            <a
+              href="https://github.com/silverhairs"
+              className="hover:text-accent"
+            >
               GitHub
             </a>
-            <a href="https://twitter.com/silverhairs7" className="hover:text-accent">
+            <a
+              href="https://twitter.com/silverhairs7"
+              className="hover:text-accent"
+            >
               Twitter
             </a>
-            <a href="mailto:hello@silverhairs.engineer" className="hover:text-accent">
+            <a
+              href="mailto:hello@silverhairs.engineer"
+              className="hover:text-accent"
+            >
               Email
             </a>
           </div>

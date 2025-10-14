@@ -13,8 +13,34 @@ const ibmPlexMono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "boris kayi - Personal Website",
-  description: "Personal blog featuring technical articles, philosophical essays, and reading notes",
+  title: "silverhairs - boris kayi",
+  description:
+    "Personal blog featuring technical articles, philosophical essays, rants, and reading notes",
+  icons: {
+    icon: [{ url: "/logo.svg", type: "image/svg+xml" }],
+    apple: [{ url: "/logo.svg", type: "image/svg+xml" }],
+  },
+  openGraph: {
+    title: "boris kayi - Personal Website",
+    description:
+      "Personal blog featuring technical articles, philosophical essays, and reading notes",
+    type: "website",
+    images: [
+      {
+        url: "/logo.svg",
+        width: 1200,
+        height: 630,
+        alt: "boris kayi logo",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary",
+    title: "silverhairs - boris kayi",
+    description:
+      "Personal blog featuring technical articles, philosophical essays, and reading notes",
+    images: ["/logo.svg"],
+  },
 };
 
 export default function RootLayout({
@@ -24,9 +50,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${ibmPlexMono.variable} antialiased`}
-      >
+      <body className={`${ibmPlexMono.variable} antialiased`}>
         <Analytics />
         <Navigation />
         {children}
