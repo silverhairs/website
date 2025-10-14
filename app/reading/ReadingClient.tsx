@@ -23,37 +23,45 @@ export default function ReadingClient({ items }: ReadingClientProps) {
     { value: 'to-read', label: 'To Read' },
   ];
 
-  const getStatusColor = (status: string) => {
+  const getStatusBadgeStyle = (status: string) => {
     switch (status) {
       case 'reading':
-        return 'text-accent';
+        return { backgroundColor: 'var(--accent)', color: '#fff' };
       case 'read':
-        return 'text-muted';
+        return { backgroundColor: 'var(--card-bg)', color: 'var(--foreground-secondary)' };
       case 'to-read':
-        return 'text-foreground';
+        return { backgroundColor: 'var(--card-bg)', color: 'var(--foreground)' };
       default:
-        return 'text-muted';
+        return { backgroundColor: 'var(--card-bg)', color: 'var(--foreground-secondary)' };
     }
   };
 
   return (
-    <main className="max-w-4xl mx-auto px-6 py-12">
-      <div className="mb-12">
-        <h1 className="text-3xl font-semibold mb-4">Reading List</h1>
-        <p className="text-muted mb-6">
+    <main className="max-w-6xl mx-auto px-6 py-16">
+      <div className="mb-16">
+        <h1
+          className="text-5xl font-bold mb-6 tracking-tight"
+          style={{ color: 'var(--foreground)' }}
+        >
+          Reading List
+        </h1>
+        <p
+          className="text-xl md:text-2xl mb-8 max-w-2xl leading-relaxed"
+          style={{ color: 'var(--foreground)' }}
+        >
           Books and papers I&apos;m reading, have read, or plan to read, with personal notes.
         </p>
 
         {/* Status Filter */}
-        <div className="flex gap-2 flex-wrap">
+        <div className="flex gap-3 flex-wrap">
           {statusFilters.map((statusFilter) => (
             <button
               key={statusFilter.value}
               onClick={() => setFilter(statusFilter.value)}
-              className={`px-3 py-1.5 text-base rounded transition-colors ${
+              className={`px-4 py-2 text-sm font-medium rounded-lg transition-all cursor-pointer ${
                 filter === statusFilter.value
-                  ? 'bg-foreground text-background'
-                  : 'bg-border hover:bg-foreground/10'
+                  ? 'btn-primary'
+                  : 'btn-secondary'
               }`}
             >
               {statusFilter.label}
@@ -63,54 +71,76 @@ export default function ReadingClient({ items }: ReadingClientProps) {
       </div>
 
       {filteredItems.length === 0 ? (
-        <p className="text-muted text-sm">
+        <p
+          className="text-base"
+          style={{ color: 'var(--foreground-secondary)' }}
+        >
           No items found. {filter !== 'all' && 'Try a different filter.'}
         </p>
       ) : (
-        <div className="space-y-6">
+        <div className="space-y-8">
           {filteredItems.map((item) => (
-            <article key={item.slug} className="group">
-              <Link href={`/reading/${item.slug}`}>
-                <div className="flex items-start justify-between gap-4 mb-2">
-                  <div>
-                    <h2 className="text-lg font-medium group-hover:text-accent transition-colors mb-1">
-                      {item.title}
-                    </h2>
-                    <p className="text-sm text-muted">by {item.author}</p>
-                  </div>
-                  <div className="flex flex-col items-end gap-1">
-                    <span className={`text-xs ${getStatusColor(item.status)}`}>
-                      {item.status === 'to-read'
-                        ? 'to read'
-                        : item.status === 'reading'
-                        ? 'reading'
-                        : 'read'}
-                    </span>
-                    {item.rating && (
-                      <span className="text-xs text-muted">
-                        {'★'.repeat(item.rating)}{'☆'.repeat(5 - item.rating)}
-                      </span>
-                    )}
-                  </div>
-                </div>
-
-                <div className="flex gap-3 text-xs text-muted">
-                  <span className="px-2 py-1 bg-border rounded capitalize">
-                    {item.type}
+            <Link
+              key={item.slug}
+              href={`/reading/${item.slug}`}
+              className="block group"
+            >
+              <div className="flex items-baseline justify-between gap-4 mb-2">
+                <h2
+                  className="text-xl font-semibold group-hover:opacity-70 transition-opacity"
+                  style={{ color: 'var(--foreground)' }}
+                >
+                  {item.title}
+                </h2>
+                <span
+                  className="text-xs font-medium px-3 py-1 rounded-full whitespace-nowrap"
+                  style={getStatusBadgeStyle(item.status)}
+                >
+                  {item.status === 'to-read'
+                    ? 'To Read'
+                    : item.status === 'reading'
+                    ? 'Reading'
+                    : 'Read'}
+                </span>
+              </div>
+              <p
+                className="text-xl md:text-2xl mb-2"
+                style={{ color: 'var(--foreground)' }}
+              >
+                by {item.author}
+              </p>
+              <div className="flex gap-3 flex-wrap items-center">
+                <span className="tag capitalize">{item.type}</span>
+                {item.rating && (
+                  <span
+                    className="text-sm"
+                    style={{ color: 'var(--accent)' }}
+                  >
+                    {'★'.repeat(item.rating)}{'☆'.repeat(5 - item.rating)}
                   </span>
-                  {item.dateFinished && (
-                    <span>
-                      Finished:{' '}
-                      {new Date(item.dateFinished).toLocaleDateString('en-US', {
-                        year: 'numeric',
-                        month: 'short',
-                      })}
-                    </span>
-                  )}
-                  {item.notes && <span>Has notes</span>}
-                </div>
-              </Link>
-            </article>
+                )}
+                {item.dateFinished && (
+                  <span
+                    className="text-xs"
+                    style={{ color: 'var(--foreground-secondary)' }}
+                  >
+                    Finished:{' '}
+                    {new Date(item.dateFinished).toLocaleDateString('en-US', {
+                      year: 'numeric',
+                      month: 'short',
+                    })}
+                  </span>
+                )}
+                {item.notes && (
+                  <span
+                    className="text-xs"
+                    style={{ color: 'var(--foreground-secondary)' }}
+                  >
+                    📝 Has notes
+                  </span>
+                )}
+              </div>
+            </Link>
           ))}
         </div>
       )}

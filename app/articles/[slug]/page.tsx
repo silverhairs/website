@@ -27,7 +27,7 @@ export async function generateMetadata({ params }: ArticlePageProps) {
   }
 
   return {
-    title: `${article.title} - boris kayi`,
+    title: `${article.title} - Boris Kayiranga`,
     description: article.excerpt,
   };
 }
@@ -41,19 +41,43 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
   }
 
   return (
-    <main className="max-w-4xl mx-auto px-6 py-12">
+    <main className="max-w-4xl mx-auto px-6 py-16">
       <Link
         href="/articles"
-        className="inline-block mb-8 text-base text-muted hover:text-accent"
+        className="inline-flex items-center gap-2 mb-12 text-sm font-medium hover:opacity-70 transition-opacity"
+        style={{ color: 'var(--foreground)' }}
       >
-        ← back to articles
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 16 16"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M10 12L6 8L10 4"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+        Back to articles
       </Link>
 
       <article>
-        <header className="mb-8 pb-8 border-b border-border">
-          <h1 className="text-3xl font-semibold mb-4">{article.title}</h1>
+        <header className="mb-12">
+          <h1
+            className="text-4xl md:text-5xl font-bold mb-6 tracking-tight leading-tight"
+            style={{ color: 'var(--foreground)' }}
+          >
+            {article.title}
+          </h1>
 
-          <div className="flex flex-wrap gap-4 text-sm text-muted">
+          <div
+            className="flex flex-wrap gap-3 text-sm items-center"
+            style={{ color: 'var(--foreground-secondary)' }}
+          >
             <time>
               {new Date(article.date).toLocaleDateString('en-US', {
                 year: 'numeric',
@@ -64,15 +88,13 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
             <span>•</span>
             <span>{article.readingTime}</span>
             <span>•</span>
-            <span className="px-2 py-0.5 bg-border rounded">
-              {article.category}
-            </span>
+            <span className="tag">{article.category}</span>
           </div>
 
           {article.tags.length > 0 && (
-            <div className="flex gap-2 mt-4 text-xs text-muted">
+            <div className="flex gap-2 mt-4 flex-wrap">
               {article.tags.map((tag) => (
-                <span key={tag} className="px-2 py-1 bg-border rounded">
+                <span key={tag} className="tag">
                   #{tag}
                 </span>
               ))}
@@ -80,17 +102,39 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
           )}
         </header>
 
-        <div className="prose prose-neutral dark:prose-invert max-w-none">
+        <div
+          className="prose prose-neutral dark:prose-invert max-w-none text-xl md:text-2xl"
+          style={{ color: 'var(--foreground)' }}
+        >
           <MDXContent source={article.content} />
         </div>
       </article>
 
-      <footer className="mt-16 pt-8 border-t border-border">
+      <footer
+        className="mt-24 pt-12 border-t"
+        style={{ borderColor: 'var(--border)' }}
+      >
         <Link
           href="/articles"
-          className="text-base text-muted hover:text-accent"
+          className="inline-flex items-center gap-2 text-sm font-medium hover:opacity-70 transition-opacity"
+          style={{ color: 'var(--foreground)' }}
         >
-          ← back to articles
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 16 16"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M10 12L6 8L10 4"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+          Back to articles
         </Link>
       </footer>
     </main>

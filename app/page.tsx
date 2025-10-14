@@ -5,93 +5,102 @@ export default function Home() {
   const recentArticles = getAllArticles().slice(0, 5);
 
   return (
-    <main className="max-w-4xl mx-auto px-6 py-12">
+    <main className="max-w-6xl mx-auto px-6">
       {/* Hero Section */}
-      <section className="mb-16">
-        <h1 className="text-3xl font-semibold mb-4">boris kayi</h1>
-        <p className="text-muted leading-relaxed mb-6">
-          software engineering generalist and perpetual learner. I write about
-          computers, technology, and whatever else crosses my mind.
+      <section className="py-24">
+        <p
+          className="text-xl md:text-2xl leading-relaxed mb-8 text-justify"
+          style={{ color: "var(--foreground)" }}
+        >
+          Also known online by the moniker silverhairs{" "}
+          <span style={{ color: "var(--foreground-secondary)" }}>
+            /ˈsɪl.vər.hɛər/
+          </span>
+          , Boris is a perpetual learner with various interests including but
+          limited to energy, software, architecture, and finance. <br />
+          Here, he writes about computers, technology, and whatever else crosses
+          my mind.
         </p>
-        <p className="text-muted leading-relaxed">
-          This is a space for thinking, reading, ranting, and sharing ideas.
-          Feel free to explore my <Link href="/articles">articles</Link> or see
-          what I&apos;m <Link href="/reading">reading</Link>.
-        </p>
+        <div className="flex gap-4 items-center">
+          <Link href="/articles" className="btn btn-secondary">
+            Articles
+          </Link>
+          <Link href="/reading" className="btn btn-secondary">
+            Reading List
+          </Link>
+        </div>
       </section>
 
       {/* Recent Articles */}
-      <section className="mb-16">
-        <div className="flex items-center justify-between mb-6">
-          <h2 className="text-xl font-semibold">Recent Articles</h2>
+      <section className="pb-16">
+        <div className="flex items-center justify-between mb-12">
+          <h2
+            className="text-3xl font-bold tracking-tight"
+            style={{ color: "var(--foreground)" }}
+          >
+            Recent Articles
+          </h2>
           <Link
             href="/articles"
-            className="text-base text-muted hover:text-accent"
+            className="text-sm font-medium hover:opacity-70 transition-opacity"
+            style={{ color: "var(--foreground)" }}
           >
-            view all →
+            View all →
           </Link>
         </div>
 
         {recentArticles.length === 0 ? (
-          <p className="text-muted text-sm">
+          <p
+            className="text-base"
+            style={{ color: "var(--foreground-secondary)" }}
+          >
             No articles yet. Check back soon!
           </p>
         ) : (
           <div className="space-y-8">
             {recentArticles.map((article) => (
-              <article key={article.slug} className="group">
-                <Link href={`/articles/${article.slug}`}>
-                  <div className="flex items-baseline justify-between gap-4 mb-2">
-                    <h3 className="font-medium group-hover:text-accent transition-colors">
-                      {article.title}
-                    </h3>
-                    <time className="text-sm text-muted whitespace-nowrap">
-                      {new Date(article.date).toLocaleDateString("en-US", {
-                        year: "numeric",
-                        month: "short",
-                        day: "numeric",
-                      })}
-                    </time>
-                  </div>
-                  <p className="text-sm text-muted mb-2">{article.excerpt}</p>
-                  <div className="flex gap-3 text-xs text-muted">
-                    <span className="px-2 py-1 bg-border rounded">
-                      {article.category}
-                    </span>
-                    <span>{article.readingTime}</span>
-                  </div>
-                </Link>
-              </article>
+              <Link
+                key={article.slug}
+                href={`/articles/${article.slug}`}
+                className="block group"
+              >
+                <div className="flex items-baseline justify-between gap-4 mb-2">
+                  <h3
+                    className="text-xl font-semibold group-hover:opacity-70 transition-opacity"
+                    style={{ color: "var(--foreground)" }}
+                  >
+                    {article.title}
+                  </h3>
+                  <time
+                    className="text-sm whitespace-nowrap"
+                    style={{ color: "var(--foreground-secondary)" }}
+                  >
+                    {new Date(article.date).toLocaleDateString("en-US", {
+                      year: "numeric",
+                      month: "short",
+                      day: "numeric",
+                    })}
+                  </time>
+                </div>
+                <p
+                  className="text-xl md:text-2xl mb-2 leading-relaxed"
+                  style={{ color: "var(--foreground)" }}
+                >
+                  {article.excerpt}
+                </p>
+                <div className="flex gap-3 items-center">
+                  <span className="tag">{article.category}</span>
+                  <span
+                    className="text-xs"
+                    style={{ color: "var(--foreground-secondary)" }}
+                  >
+                    {article.readingTime}
+                  </span>
+                </div>
+              </Link>
             ))}
           </div>
         )}
-      </section>
-
-      {/* Quick Links */}
-      <section>
-        <div className="border-t border-border pt-8">
-          <p className="text-base text-muted mb-4">Find me elsewhere:</p>
-          <div className="flex gap-4 text-base">
-            <a
-              href="https://github.com/silverhairs"
-              className="hover:text-accent"
-            >
-              GitHub
-            </a>
-            <a
-              href="https://twitter.com/silverhairs7"
-              className="hover:text-accent"
-            >
-              Twitter
-            </a>
-            <a
-              href="mailto:hello@silverhairs.engineer"
-              className="hover:text-accent"
-            >
-              Email
-            </a>
-          </div>
-        </div>
       </section>
     </main>
   );

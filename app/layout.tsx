@@ -20,7 +20,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "silverhairs - boris kayi",
+  title: "silverhairs - Boris Kayiranga",
   description:
     "Personal blog featuring technical articles, philosophical essays, rants, and reading notes",
   icons: {
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     apple: [{ url: "/logo.svg", type: "image/svg+xml" }],
   },
   openGraph: {
-    title: "boris kayi - Personal Website",
+    title: "Boris Kayiranga - Personal Website",
     description:
       "Personal blog featuring technical articles, philosophical essays, and reading notes",
     type: "website",
@@ -37,13 +37,13 @@ export const metadata: Metadata = {
         url: "/logo.svg",
         width: 1200,
         height: 630,
-        alt: "boris kayi logo",
+        alt: "Boris Kayiranga logo",
       },
     ],
   },
   twitter: {
     card: "summary",
-    title: "silverhairs - boris kayi",
+    title: "silverhairs - Boris Kayiranga",
     description:
       "Personal blog featuring technical articles, philosophical essays, and reading notes",
     images: ["/logo.svg"],

@@ -19,7 +19,7 @@ A footer that appears on every page with:
 
 **What users see**:
 ```
-© 2024 boris kayi. All content licensed under CC BY-SA 4.0.
+© 2024 Boris Kayiranga. All content licensed under CC BY-SA 4.0.
 You are free to share and adapt this content with attribution and under the same license.
 ```
 
@@ -71,9 +71,9 @@ Three license files have been created:
 
 ### Change Your Name
 
-In `components/Footer.tsx`, line 7 (currently set to "boris kayi"):
+In `components/Footer.tsx`, line 7 (currently set to "Boris Kayiranga"):
 ```tsx
-© {new Date().getFullYear()} boris kayi. All content licensed under{' '}
+© {new Date().getFullYear()} Boris Kayiranga. All content licensed under{' '}
 ```
 
 In `LICENSE`, line 189 (currently set to "Boris Kayiranga"):

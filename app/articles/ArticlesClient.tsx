@@ -24,23 +24,31 @@ export default function ArticlesClient({ articles }: ArticlesClientProps) {
   ];
 
   return (
-    <main className="max-w-4xl mx-auto px-6 py-12">
-      <div className="mb-12">
-        <h1 className="text-3xl font-semibold mb-4">Articles</h1>
-        <p className="text-muted mb-6">
+    <main className="max-w-6xl mx-auto px-6 py-16">
+      <div className="mb-16">
+        <h1
+          className="text-5xl font-bold mb-6 tracking-tight"
+          style={{ color: 'var(--foreground)' }}
+        >
+          Articles
+        </h1>
+        <p
+          className="text-xl md:text-2xl mb-8 max-w-2xl leading-relaxed"
+          style={{ color: 'var(--foreground)' }}
+        >
           Thoughts on code, math, technology, life, and philosophy.
         </p>
 
         {/* Category Filter */}
-        <div className="flex gap-2 flex-wrap">
+        <div className="flex gap-3 flex-wrap">
           {categories.map((cat) => (
             <button
               key={cat.value}
               onClick={() => setFilter(cat.value)}
-              className={`px-3 py-1.5 text-base rounded transition-colors ${
+              className={`px-4 py-2 text-sm font-medium rounded-lg transition-all cursor-pointer ${
                 filter === cat.value
-                  ? 'bg-foreground text-background'
-                  : 'bg-border hover:bg-foreground/10'
+                  ? 'btn-primary'
+                  : 'btn-secondary'
               }`}
             >
               {cat.label}
@@ -50,42 +58,67 @@ export default function ArticlesClient({ articles }: ArticlesClientProps) {
       </div>
 
       {filteredArticles.length === 0 ? (
-        <p className="text-muted text-sm">
+        <p
+          className="text-base"
+          style={{ color: 'var(--foreground-secondary)' }}
+        >
           No articles found. {filter !== 'all' && 'Try a different filter.'}
         </p>
       ) : (
         <div className="space-y-8">
           {filteredArticles.map((article) => (
-            <article key={article.slug} className="group">
-              <Link href={`/articles/${article.slug}`}>
-                <div className="flex items-baseline justify-between gap-4 mb-2">
-                  <h2 className="text-lg font-medium group-hover:text-accent transition-colors">
-                    {article.title}
-                  </h2>
-                  <time className="text-sm text-muted whitespace-nowrap">
-                    {new Date(article.date).toLocaleDateString('en-US', {
-                      year: 'numeric',
-                      month: 'short',
-                      day: 'numeric',
-                    })}
-                  </time>
-                </div>
-                <p className="text-sm text-muted mb-3">{article.excerpt}</p>
-                <div className="flex gap-3 text-xs text-muted">
-                  <span className="px-2 py-1 bg-border rounded">
-                    {article.category}
-                  </span>
-                  <span>{article.readingTime}</span>
-                  {article.tags.length > 0 && (
-                    <div className="flex gap-2">
-                      {article.tags.map((tag) => (
-                        <span key={tag}>#{tag}</span>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              </Link>
-            </article>
+            <Link
+              key={article.slug}
+              href={`/articles/${article.slug}`}
+              className="block group"
+            >
+              <div className="flex items-baseline justify-between gap-4 mb-2">
+                <h2
+                  className="text-xl font-semibold group-hover:opacity-70 transition-opacity"
+                  style={{ color: 'var(--foreground)' }}
+                >
+                  {article.title}
+                </h2>
+                <time
+                  className="text-sm whitespace-nowrap"
+                  style={{ color: 'var(--foreground-secondary)' }}
+                >
+                  {new Date(article.date).toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'short',
+                    day: 'numeric',
+                  })}
+                </time>
+              </div>
+              <p
+                className="text-xl md:text-2xl mb-2 leading-relaxed"
+                style={{ color: 'var(--foreground)' }}
+              >
+                {article.excerpt}
+              </p>
+              <div className="flex gap-3 flex-wrap items-center">
+                <span className="tag">{article.category}</span>
+                <span
+                  className="text-xs"
+                  style={{ color: 'var(--foreground-secondary)' }}
+                >
+                  {article.readingTime}
+                </span>
+                {article.tags.length > 0 && (
+                  <div className="flex gap-2 flex-wrap">
+                    {article.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="text-xs"
+                        style={{ color: 'var(--foreground-secondary)' }}
+                      >
+                        #{tag}
+                      </span>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </Link>
           ))}
         </div>
       )}

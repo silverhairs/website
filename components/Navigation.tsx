@@ -3,18 +3,30 @@ import ThemeToggle from './ThemeToggle';
 
 export default function Navigation() {
   return (
-    <nav className="border-b border-border mb-12">
-      <div className="max-w-4xl mx-auto px-6 py-6">
+    <nav className="border-b border-[var(--border)] sticky top-0 z-50 bg-[var(--background)] backdrop-blur-lg bg-opacity-80">
+      <div className="max-w-6xl mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
-          <Link href="/" className="text-xl font-semibold hover:text-accent">
-            ~/
+          <Link
+            href="/"
+            className="text-lg font-bold hover:opacity-70 transition-opacity"
+            style={{ color: 'var(--foreground)' }}
+          >
+            Boris Kayiranga
           </Link>
-          <div className="flex gap-8 text-base items-center">
-            <Link href="/articles" className="hover:text-accent transition-colors">
-              articles
+          <div className="flex gap-6 text-sm items-center font-medium">
+            <Link
+              href="/articles"
+              className="hover:opacity-70 transition-opacity"
+              style={{ color: 'var(--foreground)' }}
+            >
+              Articles
             </Link>
-            <Link href="/reading" className="hover:text-accent transition-colors">
-              reading
+            <Link
+              href="/reading"
+              className="hover:opacity-70 transition-opacity"
+              style={{ color: 'var(--foreground)' }}
+            >
+              Reading
             </Link>
             <ThemeToggle />
           </div>
