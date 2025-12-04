@@ -16,7 +16,7 @@
     "mermaid": "^11.12.0",
     "next": "15.5.4",
     "next-mdx-remote": "^5.0.0",
-    "react": "19.1.0",
+    "react": "19.2.1",
     "react-dom": "19.1.0",
     "reading-time": "^1.5.0",
     "remark-gfm": "^4.0.1",
